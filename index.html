@@ -1,0 +1,261 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StopWatch</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css" type="text/css"></link>
+    <style>
+    body {
+        background-color: bisque;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;
+        font-weight: 200;
+    }
+
+    .data-science, .hacking, .web-development {
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        justify-content: center;
+        text-align: center;
+        border: 1px solid;
+        border-radius: 1em;
+    }
+
+    .btn {
+        font-style: oblique;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <a href="#" class="navbar-brand" style="color: aliceblue;">Personal Routine </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="#" class="nav-link" style="color: antiquewhite;">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: antiquewhite;">
+                      More
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="index2.html">Things Learning(Present)</a>
+                      <a class="dropdown-item" href="index3.html">Things to Learn</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Achievements</a>
+                    </div>
+                  </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="data-science m-3 p-3">
+            <h2>Data Science</h2>
+            <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Data Science" width="400">
+            <h2 class="clock1 m-3"></h2>
+            <span>
+                <button class="btn btn-primary start1 mr-3">Start</button>
+                <button class="btn btn-warning pause1 mr-3">Pause</button>
+                <button class="btn btn-danger reset1">Reset</button>
+            </span>
+        </div>
+        <div class="hacking m-3 p-3">
+            <h2>Ethical Hacking(Penetration Testing)</h2>
+            <img src="https://images.unsplash.com/photo-1544890225-2f3faec4cd60?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=625&q=80" alt="Ethical Hacking" width="400">
+            <h2 class="clock2 m-3"></h2>
+            <span>
+                <button class="btn btn-primary start2 mr-3">Start</button>
+                <button class="btn btn-warning pause2 mr-3">Pause</button>
+                <button class="btn btn-danger reset2">Reset</button>
+            </span>
+        </div>
+        <div class="web-development m-3 p-3">
+            <h2>Web Development</h2>
+            <img src="https://flimgeeks.com/wp-content/uploads/2019/02/web-development.jpg" alt="Ethical Hacking" width="400">
+            <h2 class="clock3 m-3"></h2>
+            <span>
+                <button class="btn btn-primary start3 mr-3">Start</button>
+                <button class="btn btn-warning pause3 mr-3">Pause</button>
+                <button class="btn btn-danger reset3">Reset</button>
+            </span>
+        </div>
+        
+    </div>
+    <script>
+        let secondCount1 = 0;
+let stopWatch1;
+const displayPara1 = document.querySelector('.clock1');
+
+
+let secondCount2 = 0;
+let stopWatch2;
+const displayPara2 = document.querySelector('.clock2');
+
+
+let secondCount3 = 0;
+let stopWatch3;
+const displayPara3 = document.querySelector('.clock3');
+//function to calculate the current hour, min & seconds and the display count
+
+function displayCount1() {
+    // Calculate hours min and secs
+    let hours1 = Math.floor(secondCount1 / 3600);
+    let minutes1 = Math.floor((secondCount1 % 3600) / 60);
+    let seconds1 = Math.floor(secondCount1 % 60);
+
+    // Display leading zeros for value less than 10
+    let displayHours1 = (hours1 < 10) ? "0" + hours1: hours1;
+    let displayMinutes1 = (minutes1 < 10) ? "0" + minutes1: minutes1;
+    let displaySeconds1 = (seconds1 < 10) ? "0" + seconds1: seconds1;
+    
+    // Display the time in standard format
+    displayPara1.textContent = displayHours1 + ":" + displayMinutes1 + ":" + displaySeconds1;
+
+    // Increment the second Counter by 1
+    secondCount1 += 1;
+}
+
+// Store the references tho the buttons
+const startBtn1 = document.querySelector('.start1');
+const pauseBtn1 = document.querySelector('.pause1');
+const resetBtn1 = document.querySelector('.reset1');
+
+pauseBtn1.disabled = true;
+resetBtn1.disabled = true;
+startBtn1.addEventListener('click', () => {
+    
+    stopWatch1 = setInterval(displayCount1, 1000);
+    startBtn1.disabled = true;
+    pauseBtn1.disabled = false;
+    resetBtn1.disabled = false;
+    alert('The timer for Data Science has been started!!!');
+});
+
+pauseBtn1.addEventListener('click', () => {
+    clearInterval(stopWatch1);    
+    startBtn1.disabled = false;
+    alert('The timer has been paused!!!');
+});
+
+resetBtn1.addEventListener('click', () => {
+    clearInterval(stopWatch1);
+    startBtn1.disabled = false;
+    secondCount1 = 0;
+    displayCount1();
+});
+
+displayCount1();
+
+// For 2nd stopwatch
+
+function displayCount2() {
+    // Calculate hours min and secs
+    let hours2 = Math.floor(secondCount2 / 3600);
+    let minutes2 = Math.floor((secondCount2 % 3600) / 60);
+    let seconds2 = Math.floor(secondCount2 % 60);
+
+    // Display leading zeros for value less than 10
+    let displayHours2 = (hours2 < 10) ? "0" + hours2: hours2;
+    let displayMinutes2 = (minutes2 < 10) ? "0" + minutes2: minutes2;
+    let displaySeconds2 = (seconds2 < 10) ? "0" + seconds2: seconds2;
+    
+    // Display the time in standard format
+    displayPara2.textContent = displayHours2 + ":" + displayMinutes2 + ":" + displaySeconds2;
+
+    // Increment the second Counter by 1
+    secondCount2 += 1;
+}
+
+// Store the references tho the buttons
+const startBtn2 = document.querySelector('.start2');
+const pauseBtn2 = document.querySelector('.pause2');
+const resetBtn2 = document.querySelector('.reset2');
+
+pauseBtn2.disabled = true;
+resetBtn2.disabled = true;
+
+
+startBtn2.addEventListener('click', () => {
+    stopWatch2 = setInterval(displayCount2, 1000);
+    startBtn2.disabled = true;
+    pauseBtn2.disabled = false;
+    resetBtn2.disabled = false;
+
+    alert('The timer for Ethical Hacking has been started!!!');
+});
+
+pauseBtn2.addEventListener('click', () => {
+    clearInterval(stopWatch2);    
+    startBtn2.disabled = false;
+    alert('The timer has been paused!!!');
+});
+
+resetBtn2.addEventListener('click', () => {
+    clearInterval(stopWatch2);
+    startBtn2.disabled = false;
+    secondCount2 = 0;
+    displayCount2();
+});
+
+displayCount2();
+
+// For 3rd stopwatch
+
+function displayCount3() {
+    // Calculate hours min and secs
+    let hours3 = Math.floor(secondCount3 / 3600);
+    let minutes3 = Math.floor((secondCount3 % 3600) / 60);
+    let seconds3 = Math.floor(secondCount3 % 60);
+
+    // Display leading zeros for value less than 10
+    let displayHours3 = (hours3 < 10) ? "0" + hours3: hours3;
+    let displayMinutes3 = (minutes3 < 10) ? "0" + minutes3: minutes3;
+    let displaySeconds3 = (seconds3 < 10) ? "0" + seconds3: seconds3;
+    
+    // Display the time in standard format
+    displayPara3.textContent = displayHours3 + ":" + displayMinutes3 + ":" + displaySeconds3;
+
+    // Increment the second Counter by 1
+    secondCount3 += 1;
+}
+
+// Store the references tho the buttons
+const startBtn3 = document.querySelector('.start3');
+const pauseBtn3 = document.querySelector('.pause3');
+const resetBtn3 = document.querySelector('.reset3');
+
+pauseBtn3.disabled = true;
+resetBtn3.disabled = true;
+
+startBtn3.addEventListener('click', () => {
+    stopWatch3 = setInterval(displayCount3, 1000);
+    startBtn3.disabled = true;
+    pauseBtn3.disabled = false;
+    resetBtn3.disabled = false;
+
+    alert('The timer for Web Development has been started!!!');
+});
+
+pauseBtn3.addEventListener('click', () => {
+    clearInterval(stopWatch3);    
+    startBtn3.disabled = false;
+    alert('The timer has been paused!!!');
+});
+
+resetBtn3.addEventListener('click', () => {
+    clearInterval(stopWatch3);
+    startBtn3.disabled = false;
+    secondCount3 = 0;
+    displayCount3();
+});
+
+displayCount3();
+
+    </script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
